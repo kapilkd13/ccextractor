@@ -1,7 +1,6 @@
 #include "lib_ccx.h"
 #include "matroska.h"
 #include <limits.h>
-#include<string.h>
 
 void skip_bytes(FILE* file, ULLONG n) {
     FSEEK(file, n, SEEK_CUR);
@@ -757,15 +756,15 @@ char *filename_without_ext(char* filename) {
 
 char* generate_filename_from_track(struct matroska_ctx* mkv_ctx, struct matroska_sub_track* track)
 { 
-	char* filename_non_ext;
-	char* buf = malloc(sizeof(char) * MAX_FILE_NAME_SIZE);
-	filename_non_ext=filename_without_ext(mkv_ctx->filename);
+    char* filename_non_ext;
+    char* buf = malloc(sizeof(char) * MAX_FILE_NAME_SIZE);
+    filename_non_ext=filename_without_ext(mkv_ctx->filename);
     if (track->lang_index == 0)
         sprintf(buf, "%s_%s.%s", filename_non_ext, track->lang, matroska_track_text_subtitle_id_extensions[track->codec_id]);
     else
-        sprintf(buf, "%s_%s_%llu.%s", filename_without_ext, track->lang, track->lang_index,
+        sprintf(buf, "%s_%s_%llu.%s", filename_non_ext, track->lang, track->lang_index,
                 matroska_track_text_subtitle_id_extensions[track->codec_id]);
-	free(filename_non_ext);
+    free(filename_non_ext);
     return buf;
 }
 
