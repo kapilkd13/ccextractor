@@ -252,5 +252,7 @@ void matroska_save_all(struct matroska_ctx* mkv_ctx);
 void matroska_free_all(struct matroska_ctx* mkv_ctx);
 void matroska_parse(struct matroska_ctx* mkv_ctx);
 FILE* create_file(struct lib_ccx_ctx *ctx);
+char* filename_without_ext(char* filename);
+char* trim_new_line(char *sentence);
 
 #endif // MATROSKA_H
