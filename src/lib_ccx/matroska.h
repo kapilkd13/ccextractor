@@ -136,8 +136,6 @@
 
 /* Other defines */
 #define MATROSKA_MAX_ID_LENGTH 4
-#define MATROSKA_MAX_TRACKS 128
-#define MATROSKA_MAX_SENTENCES 8192
 #define MAX_FILE_NAME_SIZE 200
 
 /* Enums */
@@ -201,13 +199,12 @@ struct matroska_sub_track {
     ULLONG track_number;
     ULLONG lang_index;
     enum matroska_track_subtitle_codec_id codec_id;
-
     int sentence_count;
-    struct matroska_sub_sentence* sentences[MATROSKA_MAX_SENTENCES];
+    struct matroska_sub_sentence** sentences;
 };
 
 struct matroska_ctx {
-    struct matroska_sub_track* sub_tracks[MATROSKA_MAX_TRACKS];
+    struct matroska_sub_track** sub_tracks;
     struct lib_ccx_ctx* ctx;
     int sub_tracks_count;
     int sentence_count;
