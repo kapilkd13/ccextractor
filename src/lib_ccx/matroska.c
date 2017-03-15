@@ -86,7 +86,7 @@ void parse_ebml(FILE* file) {
     ULLONG len = read_vint_length(file);
     ULLONG pos = get_current_byte(file);
 
-    printf("\n");
+    mprint("\n");
 
     int code = 0, code_len = 0;
     while (pos + len > get_current_byte(file)) {
@@ -240,7 +240,7 @@ char* generate_timestamp_ass_ssa(ULLONG milliseconds) {
 }
 
 int find_sub_track_index(struct matroska_ctx* mkv_ctx, ULLONG track_number) {
-    for (int i = 0; i < mkv_ctx->sub_tracks_count; i++)
+    for (int i = mkv_ctx->sub_tracks_count-1;i>=0; i--)
         if (mkv_ctx->sub_tracks[i]->track_number == track_number)
             return i;
     return -1;
